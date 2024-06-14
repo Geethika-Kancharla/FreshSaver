@@ -79,29 +79,37 @@ export const FirebaseProvider = (props) => {
         })
     }, [])
 
-    const handleCreateNewListing = async (pname, quantity, brand, coverPic) => {
 
-        const imageRef = ref(storage, `uploads/images/${Date.now()}-${coverPic.name}`)
-        const uploadResult = await uploadBytes(imageRef, coverPic);
-        const randomId = Math.random().toString(36).substring(2, 15);
-        const messageDetail = {
-            pname,
-            brand,
-            quantity,
-            imageURL: uploadResult.ref.fullPath,
-            userId: user.uid,
-            userEmail: user.email,
-            id: randomId
-        };
-        const messageDocRef = doc(firestore, 'items', randomId);
-        return await setDoc(messageDocRef, messageDetail)
-            .then(() => {
-                console.log('User document created with UID: ', randomId);
-            })
-            .catch((error) => {
-                console.error('Error creating user document: ', error);
-            });
-    }
+
+    const handleCreateNewListing = async (pname, quantity, brand, coverPic, expiry) => {
+
+        const fileName = coverPic.name || `image-${Date.now()}.jpg`;
+        const imageRef = ref(storage, `uploads/images/${Date.now()}-${fileName}`);
+        try {
+            const uploadResult = await uploadBytes(imageRef, coverPic);
+            console.log('uploadResult:', uploadResult);
+            const randomId = Math.random().toString(36).substring(2, 15);
+            const messageDetail = {
+                pname,
+                brand,
+                quantity,
+                imageURL: uploadResult.ref.fullPath,
+                userId: user.uid,
+                userEmail: user.email,
+                id: randomId,
+                expiry
+            };
+            const messageDocRef = doc(firestore, 'items', randomId);
+            await setDoc(messageDocRef, messageDetail);
+            console.log('User document created with UID:', randomId);
+            return randomId;
+        } catch (error) {
+
+            console.error('Error creating user document:', error);
+            throw error;
+        }
+
+    };
 
     const getImageURL = (path) => {
         return getDownloadURL(ref(storage, path));
