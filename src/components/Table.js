@@ -6,9 +6,9 @@ const Table = (props) => {
     const [deleted, setDeleted] = useState(false);
     const firebase = useFirebase();
 
-    useEffect(() => {
-        firebase.getImageURL(props.imageURL).then(url => setURL(url));
-    }, [props.imageURL, firebase, deleted]);
+    // useEffect(() => {
+    //     firebase.getImageURL(props.imageURL).then(url => setURL(url));
+    // }, [props.imageURL, firebase, deleted]);
 
     const handleDelete = (id) => {
         firebase.deleteItem(id)
@@ -33,11 +33,12 @@ const Table = (props) => {
                         <th scope="col" className="px-6 py-3 text-xl">
                             Product Name
                         </th>
-                        <th scope="col" className="px-6 py-3 text-xl">
-                            Ingredients
-                        </th>
+
                         <th scope="col" className="px-6 py-3 text-xl">
                             Quantity
+                        </th>
+                        <th scope="col" className="px-6 py-3 text-xl">
+                            Category
                         </th>
                         <th scope="col" className="px-6 py-3 text-xl">
                             Expiry Date
@@ -49,17 +50,18 @@ const Table = (props) => {
                 </thead>
                 <tbody>
                     <tr className="bg-white border-b border-gray-200 hover:bg-gray-50">
-                        <td className="p-4">
+                        {/* <td className="p-4">
                             <img src={url} className="w-16 h-16 object-cover rounded-md shadow-md" alt="grocery" />
-                        </td>
+                        </td> */}
                         <td className="px-6 py-4 font-semibold text-gray-900 text-lg">
                             {props.pname}
                         </td>
-                        <td className="px-6 py-4 font-semibold text-gray-900 text-lg">
-                            {props.ingredients}
-                        </td>
+
                         <td className="px-6 py-4 font-semibold text-gray-900 text-lg">
                             {props.quantity}
+                        </td>
+                        <td className="px-6 py-4 font-semibold text-gray-900 text-lg">
+                            {props.category}
                         </td>
                         <td className="px-6 py-4 font-semibold text-gray-900 text-lg">
                             {props.expiry}

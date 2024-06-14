@@ -10,6 +10,7 @@ const BarcodeScanner = () => {
     const [product, setProduct] = useState(null);
     const [status, setStatus] = useState('Scanning for barcodes...');
     const [expiry, setExpiry] = useState('');
+    const [category, setCategory] = useState('');
 
     const handleBarcodeDetected = (result) => {
         if (result && result.codeResult && result.codeResult.code) {
@@ -23,7 +24,14 @@ const BarcodeScanner = () => {
         // Check if product details exist
         if (product) {
             // Call the Firebase function to store the details
-            firebase.handleCreateNewListing(product.name, product.quantity, product.brand, product.imageUrl, expiry);
+            firebase.handleCreateNewListing(
+                product.name,
+                product.quantity,
+                product.brand,
+                product.imageUrl,
+                expiry,
+                category // Pass the category value
+            );
             setStatus('Product stored successfully in Firebase.');
         } else {
             setStatus('No product details to store.');
@@ -103,7 +111,7 @@ const BarcodeScanner = () => {
                                 src={product.imageUrl}
                                 alt={product.name}
                                 className="w-full h-41 object-cover rounded-lg shadow-md"
-                                style={{ maxHeight: '300px' }} // Adjust max height if necessary
+                                style={{ maxHeight: '300px' }}
                             />
                         ) : (
                             <p className="italic">No image available</p>
@@ -112,12 +120,21 @@ const BarcodeScanner = () => {
                     <p><strong>Name:</strong> {product.name}</p>
                     <p><strong>Brand:</strong> {product.brand}</p>
                     <p><strong>Quantity:</strong> {product.quantity}</p>
-                    <input
-                        type="date"
-                        value={expiry}
-                        onChange={(e) => setExpiry(e.target.value)}
-                        className="border border-gray-300 rounded-sm px-3 py-1 mt-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
+                    <div className='flex flex-col space-y-3'>
+                        <input
+                            type="date"
+                            value={expiry}
+                            onChange={(e) => setExpiry(e.target.value)}
+                            className="border border-gray-300 rounded-sm p-6 text-lg mt-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                        <input
+                            type="text"
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
+                            className="p-6"
+                            placeholder='Enter the Category'
+                        />
+                    </div>
                     <button
                         onClick={handleStore}
                         className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md mt-4 focus:outline-none focus:ring-2 focus:ring-green-500"

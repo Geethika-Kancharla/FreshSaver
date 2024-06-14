@@ -7,26 +7,26 @@ const Details = () => {
     const [quantity, setQuantity] = useState('');
     const [brand, setBrand] = useState('');
     const [coverPic, setCoverPic] = useState(null);
-    const [submitting, setSubmitting] = useState(false); // State to manage form submission
+    const [submitting, setSubmitting] = useState(false);
 
     const firebase = useFirebase();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setSubmitting(true); // Set submitting state to true while submitting
+        setSubmitting(true);
         console.log('Submitted');
         await firebase.handleCreateNewListing(pname, quantity, brand, coverPic);
-        // Clear form fields after successful submission
+
         setPname('');
         setQuantity('');
         setBrand('');
         setCoverPic(null);
-        setSubmitting(false); // Reset submitting state after submission
+        setSubmitting(false);
     };
 
     return (
         <div className="flex flex-col md:flex-row md:justify-center md:items-start space-y-4 md:space-y-0">
-            {/* Barcode Scanner Section */}
+
             <div className="md:w-1/2 p-4">
                 <div className="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
                     <h1 className="text-3xl text-center mb-6 font-semibold">Barcode Scanner</h1>
@@ -34,7 +34,7 @@ const Details = () => {
                 </div>
             </div>
 
-            {/* Enter Product Details Section */}
+
             <div className="md:w-1/2 p-4">
                 <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
                     <h1 className="text-3xl text-center mb-6 font-semibold">Enter Product Details</h1>

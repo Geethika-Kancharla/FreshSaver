@@ -80,7 +80,7 @@ export const FirebaseProvider = (props) => {
     }, [])
 
 
-    const handleCreateNewListing = async (pname, quantity, brand, coverPic, expiry) => {
+    const handleCreateNewListing = async (pname, quantity, brand, coverPic, expiry, category) => {
 
         const fileName = coverPic.name || `image-${Date.now()}.jpg`;
         const imageRef = ref(storage, `uploads/images/${Date.now()}-${fileName}`);
@@ -96,7 +96,8 @@ export const FirebaseProvider = (props) => {
                 userId: user.uid,
                 userEmail: user.email,
                 id: randomId,
-                expiry
+                expiry,
+                category
             };
             const messageDocRef = doc(firestore, 'items', randomId);
             await setDoc(messageDocRef, messageDetail);
@@ -106,7 +107,6 @@ export const FirebaseProvider = (props) => {
             console.error('Error creating user document:', error);
             throw error;
         }
-
     };
 
 
@@ -173,6 +173,49 @@ export const FirebaseProvider = (props) => {
         }
     };
 
+    const listCategories = async () => {
+
+        try {
+            if (!user) {
+                console.log("User is not authenticated");
+                return [];
+            }
+
+            const userId = user.uid;
+            const twoDaysFromNow = new Date();
+            twoDaysFromNow.setDate(twoDaysFromNow.getDate() + 2);
+
+            const formattedTwoDaysFromNow = `${twoDaysFromNow.getFullYear()}-${(twoDaysFromNow.getMonth() + 1).toString().padStart(2, '0')}-${twoDaysFromNow.getDate().toString().padStart(2, '0')}`;
+
+            const qr = query(
+                collection(firestore, "items"),
+                where("userId", "==", userId),
+                where("expiry", "<=", formattedTwoDaysFromNow)
+            );
+
+            const querySnap = await getDocs(qr);
+
+            const approachingExpiryItems = [];
+            const categoriesSet = new Set(); // Using Set to ensure unique categories
+
+            querySnap.forEach((doc) => {
+                const itemData = doc.data();
+                approachingExpiryItems.push(itemData);
+                categoriesSet.add(itemData.category); // Add category to Set
+            });
+
+            const approachingExpiryCategories = Array.from(categoriesSet); // Convert Set to Array
+
+            console.log('Items approaching expiry within two days:', approachingExpiryItems);
+            console.log('Categories of items approaching expiry:', approachingExpiryCategories);
+
+            return approachingExpiryCategories;
+        } catch (error) {
+            console.error('Error querying items approaching expiry within two days:', error);
+            return [];
+        }
+    };
+
 
     const deleteItem = async (id) => {
         await deleteDoc(doc(firestore, "items", id));
@@ -185,12 +228,6 @@ export const FirebaseProvider = (props) => {
     const signinWithGoogle = () => {
         signInWithPopup(firebaseAuth, googleProvider);
     }
-    // const getCurrentUser = () => {
-    //     const currUser = firebaseAuth.currentUser;
-    //     return currUser;
-    // };
-
-    // console.log(currUser);
 
     const isLoggedIn = user ? true : false;
 
@@ -206,7 +243,7 @@ export const FirebaseProvider = (props) => {
             getImageURL,
             listOnExpiry,
             user,
-
+            listCategories
         }
         }>
             {props.children}
