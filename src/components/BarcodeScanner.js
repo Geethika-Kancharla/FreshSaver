@@ -5,22 +5,11 @@ import axios from 'axios';
 import { useFirebase } from '../context/Firebase';
 
 const BarcodeScanner = () => {
-
     const firebase = useFirebase();
-
     const webcamRef = useRef(null);
     const [product, setProduct] = useState(null);
     const [status, setStatus] = useState('Scanning for barcodes...');
-
-
-    const [pname, setPname] = useState();
-    const [quantity, setQuantity] = useState();
-    const [brand, setBrand] = useState();
-    const [coverPic, setCoverPic] = useState();
-
-    const [expiry, setExpiry] = useState();
-
-
+    const [expiry, setExpiry] = useState('');
 
     const handleBarcodeDetected = (result) => {
         if (result && result.codeResult && result.codeResult.code) {
@@ -31,18 +20,15 @@ const BarcodeScanner = () => {
     };
 
     const handleStore = () => {
-
         // Check if product details exist
         if (product) {
             // Call the Firebase function to store the details
             firebase.handleCreateNewListing(product.name, product.quantity, product.brand, product.imageUrl, expiry);
-            console.log(product.imageUrl);
             setStatus('Product stored successfully in Firebase.');
         } else {
             setStatus('No product details to store.');
         }
-
-    }
+    };
 
     const fetchProductDetails = async (barcode) => {
         try {
@@ -57,14 +43,6 @@ const BarcodeScanner = () => {
                     quantity: productData.quantity || 'N/A',
                     imageUrl: productData.image_url || null, // Ensure this is available in the response
                 });
-                setPname(productData.product_name);
-                setQuantity(productData.quantity);
-                setBrand(productData.brands);
-                setCoverPic(productData.image_url);
-                console.log(pname);
-                console.log(quantity);
-                console.log(brand);
-                console.log(coverPic);
                 setStatus('Product details fetched successfully.');
             } else {
                 setStatus('Product not found.');
@@ -105,28 +83,47 @@ const BarcodeScanner = () => {
     }, []);
 
     return (
-        <div>
-            <h2>Barcode Scanner</h2>
-            <Webcam
-                audio={false}
-                ref={webcamRef}
-                screenshotFormat="image/jpeg"
-                style={{ width: '40%', height: '40%' }}
-            />
-            <p>Status: {status}</p>
+        <div className="bg-gray-200 p-4 rounded-md shadow-md">
+            <h2 className="text-lg font-semibold mb-4">Barcode Scanner</h2>
+            <div className="relative w-full aspect-w-16 aspect-h-9 mb-4">
+                <Webcam
+                    audio={false}
+                    ref={webcamRef}
+                    screenshotFormat="image/jpeg"
+                    className="rounded-md shadow-md"
+                />
+            </div>
+            <p className="mb-2"><strong>Status:</strong> {status}</p>
             {product && (
-                <div>
-                    <h3>Product Details</h3>
-                    {product.imageUrl ? (
-                        <img src={product.imageUrl} alt={product.name} style={{ maxWidth: '100%' }} />
-                    ) : (
-                        <p>No image available</p>
-                    )}
+                <div className="border-t border-gray-300 pt-4 mt-4">
+                    <h3 className="text-lg font-semibold mb-2">Product Details</h3>
+                    <div className="mb-4">
+                        {product.imageUrl ? (
+                            <img
+                                src={product.imageUrl}
+                                alt={product.name}
+                                className="w-full h-41 object-cover rounded-lg shadow-md"
+                                style={{ maxHeight: '300px' }} // Adjust max height if necessary
+                            />
+                        ) : (
+                            <p className="italic">No image available</p>
+                        )}
+                    </div>
                     <p><strong>Name:</strong> {product.name}</p>
                     <p><strong>Brand:</strong> {product.brand}</p>
                     <p><strong>Quantity:</strong> {product.quantity}</p>
-                    <input type='date' value={expiry} onChange={(e) => setExpiry(e.target.value)} />
-                    <button onClick={handleStore}>Store</button>
+                    <input
+                        type="date"
+                        value={expiry}
+                        onChange={(e) => setExpiry(e.target.value)}
+                        className="border border-gray-300 rounded-sm px-3 py-1 mt-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                    <button
+                        onClick={handleStore}
+                        className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md mt-4 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    >
+                        Store
+                    </button>
                 </div>
             )}
         </div>

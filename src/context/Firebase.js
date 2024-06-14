@@ -8,7 +8,7 @@ import {
     signInWithEmailAndPassword,
     signInWithPopup
 } from 'firebase/auth'
-import { getFirestore, collection, query, where, getDocs, doc, deleteDoc, setDoc, serverTimestamp, addDoc } from "firebase/firestore";
+import { getFirestore, collection, query, where, Timestamp, getDocs, doc, deleteDoc, setDoc, serverTimestamp, addDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 
 
@@ -140,36 +140,38 @@ export const FirebaseProvider = (props) => {
 
     const listOnExpiry = async () => {
         try {
-
             if (!user) {
                 console.log("User is not authenticated");
                 return [];
             }
+
             const userId = user.uid;
-            const twoWeeksFromNow = new Date();
-            twoWeeksFromNow.setDate(twoWeeksFromNow.getDate() + 2);
-            console.log(twoWeeksFromNow);
+            const twoDaysFromNow = new Date();
+            twoDaysFromNow.setDate(twoDaysFromNow.getDate() + 2);
+
+            const formattedTwoDaysFromNow = `${twoDaysFromNow.getFullYear()}-${(twoDaysFromNow.getMonth() + 1).toString().padStart(2, '0')}-${twoDaysFromNow.getDate().toString().padStart(2, '0')}`;
+
             const qr = query(
                 collection(firestore, "items"),
                 where("userId", "==", userId),
-                where("expiry", "<=", twoWeeksFromNow)
+                where("expiry", "<=", formattedTwoDaysFromNow)
             );
 
             const querySnap = await getDocs(qr);
-            const approachingExpiryItems = [];
 
+            const approachingExpiryItems = [];
             querySnap.forEach((doc) => {
                 approachingExpiryItems.push(doc.data());
             });
 
-            console.log('Items approaching expiry within two weeks:', approachingExpiryItems);
+            console.log('Items approaching expiry within two days:', approachingExpiryItems);
 
             return approachingExpiryItems;
         } catch (error) {
-            console.error('Error querying items approaching expiry within two weeks:', error);
+            console.error('Error querying items approaching expiry within two days:', error);
             return [];
         }
-    }
+    };
 
 
     const deleteItem = async (id) => {
