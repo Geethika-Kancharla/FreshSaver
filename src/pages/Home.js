@@ -11,19 +11,28 @@ const Home = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      let sections = document.querySelectorAll('section');
-      let navLinks = document.querySelectorAll('header nav a');
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('header nav a');
+      
+      if (sections.length === 0 || navLinks.length === 0) {
+        return;
+      }
 
       sections.forEach(sec => {
-        let top = window.scrollY;
-        let offset = sec.offsetTop - 100;
-        let height = sec.offsetHeight;
-        let id = sec.getAttribute('id');
+        const top = window.scrollY;
+        const offset = sec.offsetTop - 100;
+        const height = sec.offsetHeight;
+        const id = sec.getAttribute('id');
 
         if (top >= offset && top < offset + height) {
           navLinks.forEach(links => {
-            links.classList.remove('active');
-            document.querySelector('header nav a[href*=' + id + ']').classList.add('active');
+            if (links) {
+              links.classList.remove('active');
+              const link = document.querySelector(`header nav a[href*=${id}]`);
+              if (link) {
+                link.classList.add('active');
+              }
+            }
           });
           sec.classList.add('show-animate');
         } else {
@@ -31,11 +40,15 @@ const Home = () => {
         }
       });
 
-      let header = document.querySelector('header');
-      header.classList.toggle('sticky', window.scrollY > 100);
+      const header = document.querySelector('header');
+      if (header) {
+        header.classList.toggle('sticky', window.scrollY > 100);
+      }
 
-      let footer = document.querySelector('footer');
-      footer.classList.toggle('show-animate', window.innerHeight + window.scrollY >= document.scrollingElement.scrollHeight);
+      const footer = document.querySelector('footer');
+      if (footer) {
+        footer.classList.toggle('show-animate', window.innerHeight + window.scrollY >= document.scrollingElement.scrollHeight);
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -46,7 +59,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className='h-screen'>
       {/* Header */}
       <header className={`header ${menuActive ? 'active' : ''}`}>
         <a href="#" className="logo">FS<span className="animate" style={{ '--i': 1 }}></span></a>
@@ -56,7 +69,6 @@ const Home = () => {
         <nav className={`navbar ${menuActive ? 'active' : ''}`}>
           <a href="#home" className="active">Home</a>
           <a href="#about">About</a>
-          
           <a href="#contact">Contact</a>
           <span className="active-nav"></span>
           <span className="animate" style={{ '--i': 2 }}></span>
@@ -88,25 +100,24 @@ const Home = () => {
 
       {/* About Section */}
       <section className="about" id="about">
-  <h2 className="heading">About <span>Me</span><span className="animate scroll" style={{ '--i': 1 }}></span></h2>
-  <div className="about-img">
-    <img src="images/about.jpg" alt=""/>
-    <span className="circle-spin"></span>
-    <span className="animate scroll" style={{ '--i': 2 }}></span>
-  </div>
-  <div className="about-content">
-    <h3>Hi there! Glad to see you here.<span className="animate scroll" style={{ '--i': 3 }}></span></h3>
-    <p>Hello! Nishat Mahmud here. A technology fanatic!<br/>
-      Currently, I am enrolled in the Department of Computer Science and Engineering at Jagannath University in Dhaka. My early education was completed from Mymensingh Zilla School and Govt. Ananda Mohon College in Mymensingh.
-      <span className="animate scroll" style={{ '--i': 4 }}></span>
-    </p>
-    <div className="btn-box btns">
-      <a href="#contact" className="btn">Contact Me</a>
-      <span className="animate scroll" style={{ '--i': 5 }}></span>
-    </div>
-  </div>
-</section>
-
+        <h2 className="heading">About <span>Me</span><span className="animate scroll" style={{ '--i': 1 }}></span></h2>
+        <div className="about-img">
+          <img src="images/about.jpg" alt=""/>
+          <span className="circle-spin"></span>
+          <span className="animate scroll" style={{ '--i': 2 }}></span>
+        </div>
+        <div className="about-content">
+          <h3>Hi there! Glad to see you here.<span className="animate scroll" style={{ '--i': 3 }}></span></h3>
+          <p>Hello! Nishat Mahmud here. A technology fanatic!<br/>
+            Currently, I am enrolled in the Department of Computer Science and Engineering at Jagannath University in Dhaka. My early education was completed from Mymensingh Zilla School and Govt. Ananda Mohon College in Mymensingh.
+            <span className="animate scroll" style={{ '--i': 4 }}></span>
+          </p>
+          <div className="btn-box btns">
+            <a href="#contact" className="btn">Contact Me</a>
+            <span className="animate scroll" style={{ '--i': 5 }}></span>
+          </div>
+        </div>
+      </section>
 
       {/* Education Section */}
       <section className="education" id="education">
@@ -280,3 +291,4 @@ const Home = () => {
 };
 
 export default Home;
+
