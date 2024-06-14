@@ -79,6 +79,63 @@ export const FirebaseProvider = (props) => {
         })
     }, [])
 
+    const handleCreateNewListing = async (pname, quantity, brand, coverPic) => {
+
+        const imageRef = ref(storage, `uploads/images/${Date.now()}-${coverPic.name}`)
+        const uploadResult = await uploadBytes(imageRef, coverPic);
+        const randomId = Math.random().toString(36).substring(2, 15);
+        const messageDetail = {
+            pname,
+            brand,
+            quantity,
+            imageURL: uploadResult.ref.fullPath,
+            userId: user.uid,
+            userEmail: user.email,
+            id: randomId
+        };
+        const messageDocRef = doc(firestore, 'items', randomId);
+        return await setDoc(messageDocRef, messageDetail)
+            .then(() => {
+                console.log('User document created with UID: ', randomId);
+            })
+            .catch((error) => {
+                console.error('Error creating user document: ', error);
+            });
+    }
+
+    const getImageURL = (path) => {
+        return getDownloadURL(ref(storage, path));
+    }
+
+    const listAllItems = async () => {
+
+        if (user) {
+            try {
+                const qr = query(
+                    collection(firestore, "items"),
+                    where("userId", "==", user.uid)
+                );
+                const querySnap = await getDocs(qr);
+                const fetchedItems = [];
+                querySnap.forEach((doc) => {
+                    fetchedItems.push(doc);
+                });
+                return fetchedItems;
+            } catch (error) {
+                console.error("Error fetching item data:", error);
+                return [];
+            }
+        } else {
+            console.log("User is null in listAllItems");
+            return [];
+        }
+    };
+
+
+    const deleteItem = async (id) => {
+        await deleteDoc(doc(firestore, "items", id));
+    }
+
     const signinUserWithEmailAndPassword = (email, password) => {
         signInWithEmailAndPassword(firebaseAuth, email, password);
     }
@@ -88,14 +145,16 @@ export const FirebaseProvider = (props) => {
     }
     const isLoggedIn = user ? true : false;
 
-
-
     return (
         <FirebaseContext.Provider value={{
             addUser,
             signinUserWithEmailAndPassword,
             signinWithGoogle,
             isLoggedIn,
+            handleCreateNewListing,
+            deleteItem,
+            listAllItems,
+            getImageURL
         }
         }>
             {props.children}
