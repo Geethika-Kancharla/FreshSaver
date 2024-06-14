@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Home.css';
-import './boxicons.min.css'; // Importing boxicons CSS
+import 'boxicons/css/boxicons.min.css'; // Importing boxicons CSS
 
 const Home = () => {
   const [menuActive, setMenuActive] = useState(false);
@@ -56,8 +56,7 @@ const Home = () => {
         <nav className={`navbar ${menuActive ? 'active' : ''}`}>
           <a href="#home" className="active">Home</a>
           <a href="#about">About</a>
-          <a href="#education">Education</a>
-          <a href="#skills">Skills</a>
+          
           <a href="#contact">Contact</a>
           <span className="active-nav"></span>
           <span className="animate" style={{ '--i': 2 }}></span>
@@ -89,24 +88,25 @@ const Home = () => {
 
       {/* About Section */}
       <section className="about" id="about">
-        <h2 className="heading">About <span>Me</span><span className="animate scroll" style={{ '--i': 1 }}></span></h2>
-        <div className="about-img">
-          <img src="images/about.jpg" alt=""/>
-          <span className="circle-spin"></span>
-          <span className="animate scroll" style={{ '--i': 2 }}></span>
-        </div>
-        <div className="about-content">
-          <h3>Hi there! Glad to see you here.<span className="animate scroll" style={{ '--i': 3 }}></span></h3>
-          <p>Hello! Nishat Mahmud here. A technology fanatic!<br/>
-            Currently, I am enrolled in the Department of Computer Science and Engineering at Jagannath University in Dhaka. My early education was completed from Mymensingh Zilla School and Govt. Ananda Mohon College in Mymensingh.
-            <span className="animate scroll" style={{ '--i': 4 }}></span>
-          </p>
-          <div className="btn-box btns">
-            <a href="#contact" className="btn">Contact Me</a>
-            <span className="animate scroll" style={{ '--i': 5 }}></span>
-          </div>
-        </div>
-      </section>
+  <h2 className="heading">About <span>Me</span><span className="animate scroll" style={{ '--i': 1 }}></span></h2>
+  <div className="about-img">
+    <img src="images/about.jpg" alt=""/>
+    <span className="circle-spin"></span>
+    <span className="animate scroll" style={{ '--i': 2 }}></span>
+  </div>
+  <div className="about-content">
+    <h3>Hi there! Glad to see you here.<span className="animate scroll" style={{ '--i': 3 }}></span></h3>
+    <p>Hello! Nishat Mahmud here. A technology fanatic!<br/>
+      Currently, I am enrolled in the Department of Computer Science and Engineering at Jagannath University in Dhaka. My early education was completed from Mymensingh Zilla School and Govt. Ananda Mohon College in Mymensingh.
+      <span className="animate scroll" style={{ '--i': 4 }}></span>
+    </p>
+    <div className="btn-box btns">
+      <a href="#contact" className="btn">Contact Me</a>
+      <span className="animate scroll" style={{ '--i': 5 }}></span>
+    </div>
+  </div>
+</section>
+
 
       {/* Education Section */}
       <section className="education" id="education">
