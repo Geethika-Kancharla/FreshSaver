@@ -80,7 +80,6 @@ export const FirebaseProvider = (props) => {
     }, [])
 
 
-
     const handleCreateNewListing = async (pname, quantity, brand, coverPic, expiry) => {
 
         const fileName = coverPic.name || `image-${Date.now()}.jpg`;
@@ -104,12 +103,12 @@ export const FirebaseProvider = (props) => {
             console.log('User document created with UID:', randomId);
             return randomId;
         } catch (error) {
-
             console.error('Error creating user document:', error);
             throw error;
         }
 
     };
+
 
     const getImageURL = (path) => {
         return getDownloadURL(ref(storage, path));
@@ -139,6 +138,39 @@ export const FirebaseProvider = (props) => {
         }
     };
 
+    const listOnExpiry = async () => {
+        try {
+
+            if (!user) {
+                console.log("User is not authenticated");
+                return [];
+            }
+            const userId = user.uid;
+            const twoWeeksFromNow = new Date();
+            twoWeeksFromNow.setDate(twoWeeksFromNow.getDate() + 2);
+            console.log(twoWeeksFromNow);
+            const qr = query(
+                collection(firestore, "items"),
+                where("userId", "==", userId),
+                where("expiry", "<=", twoWeeksFromNow)
+            );
+
+            const querySnap = await getDocs(qr);
+            const approachingExpiryItems = [];
+
+            querySnap.forEach((doc) => {
+                approachingExpiryItems.push(doc.data());
+            });
+
+            console.log('Items approaching expiry within two weeks:', approachingExpiryItems);
+
+            return approachingExpiryItems;
+        } catch (error) {
+            console.error('Error querying items approaching expiry within two weeks:', error);
+            return [];
+        }
+    }
+
 
     const deleteItem = async (id) => {
         await deleteDoc(doc(firestore, "items", id));
@@ -151,6 +183,13 @@ export const FirebaseProvider = (props) => {
     const signinWithGoogle = () => {
         signInWithPopup(firebaseAuth, googleProvider);
     }
+    // const getCurrentUser = () => {
+    //     const currUser = firebaseAuth.currentUser;
+    //     return currUser;
+    // };
+
+    // console.log(currUser);
+
     const isLoggedIn = user ? true : false;
 
     return (
@@ -162,7 +201,10 @@ export const FirebaseProvider = (props) => {
             handleCreateNewListing,
             deleteItem,
             listAllItems,
-            getImageURL
+            getImageURL,
+            listOnExpiry,
+            user,
+
         }
         }>
             {props.children}

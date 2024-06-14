@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Home.css';
 import 'boxicons/css/boxicons.min.css'; // Importing boxicons CSS
+import { Link } from 'react-router-dom'
 
 const Home = () => {
   const [menuActive, setMenuActive] = useState(false);
@@ -28,7 +29,7 @@ const Home = () => {
           navLinks.forEach(links => {
             if (links) {
               links.classList.remove('active');
-              const link = document.querySelector(`header nav a[href*=${id}]`);
+              const link = document.querySelector(`header nav a[href *= ${id}]`);
               if (link) {
                 link.classList.add('active');
               }
@@ -69,60 +70,51 @@ const Home = () => {
         <nav className={`navbar ${menuActive ? 'active' : ''}`}>
           <a href="#home" className="active">Home</a>
           <a href="#about">About</a>
-          
-          <a href="#contact">Contact</a>
+          <a href="#education">Sevices</a>
+          <a href="#contact">Feedback</a>
           <span className="active-nav"></span>
           <span className="animate" style={{ '--i': 2 }}></span>
         </nav>
-      </header>
+      </header >
 
       {/* Home Section */}
-      <section className="home show-animate" id="home">
+      < section className="home show-animate" id="home" >
         <div className="home-content">
           <h1>Welcome to <span>"FreshSaver"!</span><span className="animate" style={{ '--i': 2 }}></span></h1>
-          <p>Your ultimate destination for preserving freshness with smart solutions and eco-friendly products. Discover how we're redefining freshness, one innovation at a time.
+          <p>Your ultimate destination for preserving freshness with smart solutions<br /> and eco-friendly products. Discover how we're redefining freshness,<br /> one innovation at a time.
             <span className="animate" style={{ '--i': 4 }}></span>
           </p>
           <div className="btn-box">
-            <a href="#" className="btn">Scan Now</a>
-            <a href="#" className="btn">View</a>
+            <Link to="/details" className="btn">Scan Now</Link>
+            <Link to="/display" className="btn">View</Link>
             <span className="animate" style={{ '--i': 5 }}></span>
           </div>
         </div>
-        <div className="home-sci">
-          <a href="#"><i className='bx bxl-facebook'></i></a>
-          <a href="#"><i className='bx bxl-twitter'></i></a>
-          <a href="#"><i className='bx bxl-linkedin'></i></a>
-          <span className="animate" style={{ '--i': 6 }}></span>
-        </div>
+
         <div className="home-imgHover"></div>
         <span className="animate home-img" style={{ '--i': 7 }}></span>
-      </section>
+      </section >
 
       {/* About Section */}
-      <section className="about" id="about">
-  <h2 className="heading">About <span>Me</span><span className="animate scroll" style={{ '--i': 1 }}></span></h2>
-  <div className="about-img">
-    <img src="images/about.jpg" alt=""/>
-    <span className="circle-spin"></span>
-    <span className="animate scroll" style={{ '--i': 2 }}></span>
-  </div>
-  <div className="about-content">
-    <h3>Hi there! Glad to see you here.<span className="animate scroll" style={{ '--i': 3 }}></span></h3>
-    <p>Hello! Nishat Mahmud here. A technology fanatic!<br/>
-      Currently, I am enrolled in the Department of Computer Science and Engineering at Jagannath University in Dhaka. My early education was completed from Mymensingh Zilla School and Govt. Ananda Mohon College in Mymensingh.
-      <span className="animate scroll" style={{ '--i': 4 }}></span>
-    </p>
-    <div className="btn-box btns">
-      <a href="#contact" className="btn">Contact Me</a>
-      <span className="animate scroll" style={{ '--i': 5 }}></span>
-    </div>
-  </div>
-</section>
+      < section className="about" id="about" >
+        <h2 className="heading">About <span>Me</span><span className="animate scroll" style={{ '--i': 1 }}></span></h2>
+        <div className="about-img">
+          <img src="/assets/about.jpg" alt="" />
+          <span className="circle-spin"></span>
+          <span className="animate scroll" style={{ '--i': 2 }}></span>
+        </div>
+        <div className="about-content">
+          <h3>Efficient Inventory Solutions<span className="animate scroll" style={{ '--i': 3 }}></span></h3>
+          <p>FreshSaver is a comprehensive inventory management system designed to streamline and enhance the process of tracking and managing inventory. Utilizing barcode scanning technology, FreshSaver provides real-time updates, ensures accurate stock levels, and offers detailed insights into inventory movements. Our solution aims to reduce waste, optimize storage space, and improve overall efficiency in inventory management.
+            <span className="animate scroll" style={{ '--i': 4 }}></span>
+          </p>
+
+        </div>
+      </section >
 
 
       {/* Education Section */}
-      <section className="education" id="education">
+      < section className="education" id="education" >
         <h2 className="heading">Our <span>Services</span><span className="animate scroll" style={{ '--i': 1 }}></span></h2>
         <div className="education-row">
           <div className="education-column">
@@ -130,14 +122,14 @@ const Home = () => {
             <div className="education-box">
               <div className="education-content">
                 <div className="content">
-                  
+
                   <h3>Smart Inventory Management</h3>
                   <p>Keep a detailed inventory of your pantry items, tracking quantities and expiration dates to ensure you know what you have and avoid waste.</p>
                 </div>
               </div>
               <div className="education-content">
                 <div className="content">
-                 
+
                   <h3>Expiry Date Notifications</h3>
                   <p>Receive timely notifications when products are nearing their expiry dates, helping you use groceries efficiently and reduce food waste.</p>
                 </div>
@@ -157,14 +149,14 @@ const Home = () => {
             <div className="education-box">
               <div className="education-content">
                 <div className="content">
-                  
+
                   <h3>Recipe Recommendations</h3>
                   <p>Get personalized recipe suggestions based on ingredients nearing expiry, making meal planning easy and helping you use up soon-to-expire products.</p>
                 </div>
               </div>
               <div className="education-content">
                 <div className="content">
-                  
+
                   <h3>Shopping List Generation</h3>
                   <p>Automatically generate shopping lists based on your inventory and consumption patterns, ensuring you never forget an essential item.</p>
                 </div>
@@ -173,18 +165,18 @@ const Home = () => {
                 <div className="content">
 
                   <h3>User-friendly Interface</h3>
-                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis dolorem harum dolorum debitis. Magni, iste! Perferendis laborum reprehenderit dolorum totam.</p>
+                  <p>Our app features an intuitive interface, making it easy for anyone to manage groceries and plan meals efficiently.</p>
                 </div>
               </div>
               <span className="animate scroll" style={{ '--i': 6 }}></span>
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
-      
+
       {/* Contact Section */}
-      <section className="contact" id="contact">
+      < section className="contact" id="contact" >
         <h2 className="heading">Feedback <span></span><span className="animate scroll" style={{ '--i': 1 }}></span></h2>
         <form action="#">
           <div className="input-box">
@@ -218,10 +210,10 @@ const Home = () => {
             <span className="animate scroll" style={{ '--i': 6 }}></span>
           </div>
         </form>
-      </section>
+      </section >
 
       {/* Footer */}
-      <footer>
+      < footer >
         <div className="footer-text">
           <p>© 2023 Nishat Mahmud. All Rights Reserved.<span className="animate scroll" style={{ '--i': 1 }}></span></p>
         </div>
@@ -229,10 +221,9 @@ const Home = () => {
           <a href="#"><i className="bx bx-up-arrow-alt"></i></a>
           <span className="animate scroll" style={{ '--i': 2 }}></span>
         </div>
-      </footer>
-    </div>
+      </footer >
+    </div >
   );
 };
 
 export default Home;
-
