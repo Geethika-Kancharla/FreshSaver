@@ -12,8 +12,8 @@
 }
 
 :root {
-    --bg-color: #ebf3f9;
-    --second-bg-color: #112e42;
+    --bg-color: #f6f8fa;
+    --second-bg-color: #f7fafc;
     --text-color: #0a0000;
     --main-color: #00f020;
 }
@@ -333,11 +333,13 @@ span {
     width: 100%;
     height: 100%;
     border-radius: 50%;
+    background-image: url('../../public/assets/about.jpeg');
+    background-size: contain;
     border-top: .2rem solid var(--second-bg-color);
     border-bottom: .2rem solid var(--second-bg-color);
     border-left: .2rem solid var(--main-color);
     border-right: .2rem solid var(--main-color);
-    animation: aboutSpinner 8s linear infinite;
+
 }
 
 .about-content {
