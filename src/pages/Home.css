@@ -271,9 +271,9 @@ section {
 }
 
 .home-imgHover:hover {
-    background: var(--bg-color);
+    background: transparent;
     /* Assumes --bg-color is defined elsewhere */
-    opacity: 0.8;
+    opacity:1;
     /* Adjust opacity as needed */
 }
 

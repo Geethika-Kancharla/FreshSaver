@@ -20,7 +20,7 @@ const Display = () => {
 
     return (
         <div>
-            <h1>Displaying details here</h1>
+            <h1 className=" text-center"> Displaying details here</h1>
             {items.map((item, index) => (
                 <Table key={index} onItemDelete={handleItemDelete} {...item.data()} />
             ))}
