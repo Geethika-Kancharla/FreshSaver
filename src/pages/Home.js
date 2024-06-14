@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Home.css';
 import 'boxicons/css/boxicons.min.css'; // Importing boxicons CSS
+import {Link} from 'react-router-dom'
 
 const Home = () => {
   const [menuActive, setMenuActive] = useState(false);
@@ -80,21 +81,16 @@ const Home = () => {
       <section className="home show-animate" id="home">
         <div className="home-content">
           <h1>Welcome to <span>"FreshSaver"!</span><span className="animate" style={{ '--i': 2 }}></span></h1>
-          <p>Your ultimate destination for preserving freshness with smart solutions and eco-friendly products. Discover how we're redefining freshness, one innovation at a time.
+          <p>Your ultimate destination for preserving freshness with smart solutions<br/> and eco-friendly products. Discover how we're redefining freshness,<br/> one innovation at a time.
             <span className="animate" style={{ '--i': 4 }}></span>
           </p>
           <div className="btn-box">
-            <a href="#" className="btn">Scan Now</a>
-            <a href="#" className="btn">View</a>
+            <Link to="/details" className="btn">Scan Now</Link>
+            <Link to="/display" className="btn">View</Link>
             <span className="animate" style={{ '--i': 5 }}></span>
           </div>
         </div>
-        <div className="home-sci">
-          <a href="#"><i className='bx bxl-facebook'></i></a>
-          <a href="#"><i className='bx bxl-twitter'></i></a>
-          <a href="#"><i className='bx bxl-linkedin'></i></a>
-          <span className="animate" style={{ '--i': 6 }}></span>
-        </div>
+        
         <div className="home-imgHover"></div>
         <span className="animate home-img" style={{ '--i': 7 }}></span>
       </section>
