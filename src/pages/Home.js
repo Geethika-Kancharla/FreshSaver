@@ -69,8 +69,8 @@ const Home = () => {
         <nav className={`navbar ${menuActive ? 'active' : ''}`}>
           <a href="#home" className="active">Home</a>
           <a href="#about">About</a>
-          
-          <a href="#contact">Contact</a>
+          <a href="#education">Sevices</a>
+          <a href="#contact">Feedback</a>
           <span className="active-nav"></span>
           <span className="animate" style={{ '--i': 2 }}></span>
         </nav>
@@ -84,8 +84,8 @@ const Home = () => {
             <span className="animate" style={{ '--i': 4 }}></span>
           </p>
           <div className="btn-box">
-            <a href="#" className="btn">Hire Me</a>
-            <a href="#" className="btn">Let's Talk</a>
+            <a href="#" className="btn">Scan Now</a>
+            <a href="#" className="btn">View</a>
             <span className="animate" style={{ '--i': 5 }}></span>
           </div>
         </div>
@@ -103,76 +103,72 @@ const Home = () => {
       <section className="about" id="about">
   <h2 className="heading">About <span>Me</span><span className="animate scroll" style={{ '--i': 1 }}></span></h2>
   <div className="about-img">
-    <img src="images/about.jpg" alt=""/>
+    <img src="/assets/about.jpg" alt=""/>
     <span className="circle-spin"></span>
     <span className="animate scroll" style={{ '--i': 2 }}></span>
   </div>
   <div className="about-content">
-    <h3>Hi there! Glad to see you here.<span className="animate scroll" style={{ '--i': 3 }}></span></h3>
-    <p>Hello! Nishat Mahmud here. A technology fanatic!<br/>
-      Currently, I am enrolled in the Department of Computer Science and Engineering at Jagannath University in Dhaka. My early education was completed from Mymensingh Zilla School and Govt. Ananda Mohon College in Mymensingh.
+    <h3>Efficient Inventory Solutions<span className="animate scroll" style={{ '--i': 3 }}></span></h3>
+    <p>FreshSaver is a comprehensive inventory management system designed to streamline and enhance the process of tracking and managing inventory. Utilizing barcode scanning technology, FreshSaver provides real-time updates, ensures accurate stock levels, and offers detailed insights into inventory movements. Our solution aims to reduce waste, optimize storage space, and improve overall efficiency in inventory management.
       <span className="animate scroll" style={{ '--i': 4 }}></span>
     </p>
-    <div className="btn-box btns">
-      <a href="#contact" className="btn">Contact Me</a>
-      <span className="animate scroll" style={{ '--i': 5 }}></span>
-    </div>
+    
   </div>
 </section>
 
 
       {/* Education Section */}
       <section className="education" id="education">
-        <h2 className="heading">My <span>Journey</span><span className="animate scroll" style={{ '--i': 1 }}></span></h2>
+        <h2 className="heading">Our <span>Services</span><span className="animate scroll" style={{ '--i': 1 }}></span></h2>
         <div className="education-row">
           <div className="education-column">
-            <h3 className="title">Education<span className="animate scroll" style={{ '--i': 2 }}></span></h3>
+            <h3 className="title"><span className="animate scroll" style={{ '--i': 2 }}></span></h3>
             <div className="education-box">
               <div className="education-content">
                 <div className="content">
-                  <div className="year"><i className='bx bxs-calendar'></i> 2017 - 2018</div>
-                  <h3>Master Degree - University</h3>
-                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis dolorem harum dolorum debitis. Magni, iste! Perferendis laborum reprehenderit dolorum totam.</p>
+                  
+                  <h3>Smart Inventory Management</h3>
+                  <p>Keep a detailed inventory of your pantry items, tracking quantities and expiration dates to ensure you know what you have and avoid waste.</p>
                 </div>
               </div>
               <div className="education-content">
                 <div className="content">
-                  <div className="year"><i className='bx bxs-calendar'></i> 2018 - 2019</div>
-                  <h3>Master Degree - University</h3>
-                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis dolorem harum dolorum debitis. Magni, iste! Perferendis laborum reprehenderit dolorum totam.</p>
+                 
+                  <h3>Expiry Date Notifications</h3>
+                  <p>Receive timely notifications when products are nearing their expiry dates, helping you use groceries efficiently and reduce food waste.</p>
                 </div>
               </div>
               <div className="education-content">
                 <div className="content">
-                  <div className="year"><i className='bx bxs-calendar'></i> 2019 - 2020</div>
-                  <h3>Master Degree - University</h3>
-                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis dolorem harum dolorum debitis. Magni, iste! Perferendis laborum reprehenderit dolorum totam.</p>
+
+                  <h3>Barcode Scanning</h3>
+                  <p>Quickly add items to your inventory using our barcode scanning feature, saving time and ensuring accuracy</p>
                 </div>
               </div>
               <span className="animate scroll" style={{ '--i': 3 }}></span>
             </div>
           </div>
           <div className="education-column">
-            <h3 className="title">Experience<span className="animate scroll" style={{ '--i': 5 }}></span></h3>
+            <h3 className="title"><span className="animate scroll" style={{ '--i': 5 }}></span></h3>
             <div className="education-box">
               <div className="education-content">
                 <div className="content">
-                  <div className="year"><i className='bx bxs-calendar'></i> 2017 - 2018</div>
-                  <h3>Web Developer - Company</h3>
-                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis dolorem harum dolorum debitis. Magni, iste! Perferendis laborum reprehenderit dolorum totam.</p>
+                  
+                  <h3>Recipe Recommendations</h3>
+                  <p>Get personalized recipe suggestions based on ingredients nearing expiry, making meal planning easy and helping you use up soon-to-expire products.</p>
                 </div>
               </div>
               <div className="education-content">
                 <div className="content">
-                  <div className="year"><i className='bx bxs-calendar'></i> 2018 - 2019</div>
-                  <h3>Web Developer - Company</h3>
-                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis dolorem harum dolorum debitis. Magni, iste! Perferendis laborum reprehenderit dolorum totam.</p>
+                  
+                  <h3>Shopping List Generation</h3>
+                  <p>Automatically generate shopping lists based on your inventory and consumption patterns, ensuring you never forget an essential item.</p>
                 </div>
               </div>
               <div className="education-content">
                 <div className="content">
-                  <div className="year"><i className='bx bxs-calendar'></i> 2019 - 2020</div>
-                  <h3>Web Developer - Company</h3>
+
+                  <h3>User-friendly Interface</h3>
                   <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis dolorem harum dolorum debitis. Magni, iste! Perferendis laborum reprehenderit dolorum totam.</p>
                 </div>
               </div>
@@ -182,68 +178,10 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Skills Section */}
-      <section className="skills" id="skills">
-        <h2 className="heading">My <span>Skills</span><span className="animate scroll" style={{ '--i': 1 }}></span></h2>
-        <div className="skills-row">
-          <div className="skills-column">
-            <h3 className="title">Coding Skills<span className="animate scroll" style={{ '--i': 2 }}></span></h3>
-            <div className="skills-box">
-              <div className="skills-content">
-                <div className="progress">
-                  <h3>HTML<span>90%</span></h3>
-                  <div className="bar"><span></span></div>
-                </div>
-                <div className="progress">
-                  <h3>CSS<span>70%</span></h3>
-                  <div className="bar"><span></span></div>
-                </div>
-                <div className="progress">
-                  <h3>JavaScript<span>60%</span></h3>
-                  <div className="bar"><span></span></div>
-                </div>
-                <div className="progress">
-                  <h3>Python<span>80%</span></h3>
-                  <div className="bar"><span></span></div>
-                </div>
-                <div className="progress">
-                  <h3>React<span>50%</span></h3>
-                  <div className="bar"><span></span></div>
-                </div>
-                <span className="animate scroll" style={{ '--i': 3 }}></span>
-              </div>
-            </div>
-          </div>
-          <div className="skills-column">
-            <h3 className="title">Professional Skills<span className="animate scroll" style={{ '--i': 5 }}></span></h3>
-            <div className="skills-box">
-              <div className="skills-content">
-                <div className="progress">
-                  <h3>Communication<span>70%</span></h3>
-                  <div className="bar"><span></span></div>
-                </div>
-                <div className="progress">
-                  <h3>Team Work<span>50%</span></h3>
-                  <div className="bar"><span></span></div>
-                </div>
-                <div className="progress">
-                  <h3>Project Management<span>60%</span></h3>
-                  <div className="bar"><span></span></div>
-                </div>
-                <div className="progress">
-                  <h3>Creativity<span>90%</span></h3>
-                  <div className="bar"><span></span></div>
-                </div>
-                <span className="animate scroll" style={{ '--i': 6 }}></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
+      
       {/* Contact Section */}
       <section className="contact" id="contact">
-        <h2 className="heading">Contact <span>Me!</span><span className="animate scroll" style={{ '--i': 1 }}></span></h2>
+        <h2 className="heading">Feedback <span></span><span className="animate scroll" style={{ '--i': 1 }}></span></h2>
         <form action="#">
           <div className="input-box">
             <div className="input-field">
