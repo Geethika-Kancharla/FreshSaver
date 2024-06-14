@@ -18,6 +18,10 @@ const BarcodeScanner = () => {
     const [brand, setBrand] = useState();
     const [coverPic, setCoverPic] = useState();
 
+    const [expiry, setExpiry] = useState();
+
+
+
     const handleBarcodeDetected = (result) => {
         if (result && result.codeResult && result.codeResult.code) {
             setStatus(`Barcode detected: ${result.codeResult.code}`);
@@ -31,7 +35,8 @@ const BarcodeScanner = () => {
         // Check if product details exist
         if (product) {
             // Call the Firebase function to store the details
-            firebase.handleCreateNewListing(product.name, product.quantity, product.brand, { coverPic: product.imageUrl });
+            firebase.handleCreateNewListing(product.name, product.quantity, product.brand, product.imageUrl, expiry);
+            console.log(product.imageUrl);
             setStatus('Product stored successfully in Firebase.');
         } else {
             setStatus('No product details to store.');
@@ -120,6 +125,7 @@ const BarcodeScanner = () => {
                     <p><strong>Name:</strong> {product.name}</p>
                     <p><strong>Brand:</strong> {product.brand}</p>
                     <p><strong>Quantity:</strong> {product.quantity}</p>
+                    <input type='date' value={expiry} onChange={(e) => setExpiry(e.target.value)} />
                     <button onClick={handleStore}>Store</button>
                 </div>
             )}
