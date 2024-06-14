@@ -14,7 +14,7 @@ const Home = () => {
     const handleScroll = () => {
       const sections = document.querySelectorAll('section');
       const navLinks = document.querySelectorAll('header nav a');
-
+      
       if (sections.length === 0 || navLinks.length === 0) {
         return;
       }
@@ -70,8 +70,8 @@ const Home = () => {
         <nav className={`navbar ${menuActive ? 'active' : ''}`}>
           <a href="#home" className="active">Home</a>
           <a href="#about">About</a>
-          
-          <a href="#contact">Contact</a>
+          <a href="#education">Sevices</a>
+          <a href="#contact">Feedback</a>
           <span className="active-nav"></span>
           <span className="animate" style={{ '--i': 2 }}></span>
         </nav>
@@ -99,20 +99,16 @@ const Home = () => {
       <section className="about" id="about">
   <h2 className="heading">About <span>Me</span><span className="animate scroll" style={{ '--i': 1 }}></span></h2>
   <div className="about-img">
-    <img src="images/about.jpg" alt=""/>
+    <img src="/assets/about.jpg" alt=""/>
     <span className="circle-spin"></span>
     <span className="animate scroll" style={{ '--i': 2 }}></span>
   </div>
   <div className="about-content">
-    <h3>Hi there! Glad to see you here.<span className="animate scroll" style={{ '--i': 3 }}></span></h3>
-    <p>Hello! Nishat Mahmud here. A technology fanatic!<br/>
-      Currently, I am enrolled in the Department of Computer Science and Engineering at Jagannath University in Dhaka. My early education was completed from Mymensingh Zilla School and Govt. Ananda Mohon College in Mymensingh.
+    <h3>Efficient Inventory Solutions<span className="animate scroll" style={{ '--i': 3 }}></span></h3>
+    <p>FreshSaver is a comprehensive inventory management system designed to streamline and enhance the process of tracking and managing inventory. Utilizing barcode scanning technology, FreshSaver provides real-time updates, ensures accurate stock levels, and offers detailed insights into inventory movements. Our solution aims to reduce waste, optimize storage space, and improve overall efficiency in inventory management.
       <span className="animate scroll" style={{ '--i': 4 }}></span>
     </p>
-    <div className="btn-box btns">
-      <a href="#contact" className="btn">Contact Me</a>
-      <span className="animate scroll" style={{ '--i': 5 }}></span>
-    </div>
+    
   </div>
 </section>
 
@@ -169,7 +165,7 @@ const Home = () => {
                 <div className="content">
 
                   <h3>User-friendly Interface</h3>
-                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis dolorem harum dolorum debitis. Magni, iste! Perferendis laborum reprehenderit dolorum totam.</p>
+                  <p>Our app features an intuitive interface, making it easy for anyone to manage groceries and plan meals efficiently.</p>
                 </div>
               </div>
               <span className="animate scroll" style={{ '--i': 6 }}></span>
