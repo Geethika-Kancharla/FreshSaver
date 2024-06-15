@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Home.css';
 import 'boxicons/css/boxicons.min.css'; // Importing boxicons CSS
 import { Link } from 'react-router-dom'
+import { useFirebase } from '../context/Firebase';
 
 const Home = () => {
   const [menuActive, setMenuActive] = useState(false);
@@ -9,6 +10,14 @@ const Home = () => {
   const toggleMenu = () => {
     setMenuActive(!menuActive);
   };
+
+  const [isMenu, setMenu] = useState(false);
+
+  const handleClick = () => {
+    setMenu(!isMenu);
+  }
+
+  const firebase = useFirebase();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,6 +81,9 @@ const Home = () => {
           <a href="#about">About</a>
           <a href="#education">Sevices</a>
           <a href="#contact">Feedback</a>
+          <Link className="text-green-500 pl-6 hover:bg-white hover:text-red-600" onClick={firebase.handleLogout}>Logout </Link>
+
+
           <span className="active-nav"></span>
           <span className="animate" style={{ '--i': 2 }}></span>
         </nav>

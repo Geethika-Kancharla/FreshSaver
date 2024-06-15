@@ -6,10 +6,12 @@ import {
     GoogleAuthProvider,
     onAuthStateChanged,
     signInWithEmailAndPassword,
-    signInWithPopup
+    signInWithPopup,
+    signOut
 } from 'firebase/auth'
-import { getFirestore, collection, query, where, Timestamp, getDocs, doc, deleteDoc, setDoc, serverTimestamp, addDoc } from "firebase/firestore";
+import { getFirestore, collection, query, where, getDocs, doc, deleteDoc, setDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { getMessaging } from "firebase/messaging";
 
 
 const FirebaseContext = createContext(null);
@@ -30,6 +32,7 @@ export const firebaseAuth = getAuth(firebaseApp);
 const googleProvider = new GoogleAuthProvider();
 export const firestore = getFirestore(firebaseApp);
 const storage = getStorage(firebaseApp);
+export const messaging = getMessaging(firebaseApp);
 
 
 export const useFirebase = () => {
@@ -231,6 +234,14 @@ export const FirebaseProvider = (props) => {
 
     const isLoggedIn = user ? true : false;
 
+    const handleLogout = async () => {
+        try {
+            await signOut(firebaseAuth);
+        } catch (error) {
+            console.error('Error occurred during logout:', error);
+        }
+    };
+
     return (
         <FirebaseContext.Provider value={{
             addUser,
@@ -243,7 +254,8 @@ export const FirebaseProvider = (props) => {
             getImageURL,
             listOnExpiry,
             user,
-            listCategories
+            listCategories,
+            handleLogout
         }
         }>
             {props.children}

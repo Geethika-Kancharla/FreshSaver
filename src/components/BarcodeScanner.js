@@ -16,23 +16,24 @@ const BarcodeScanner = () => {
         if (result && result.codeResult && result.codeResult.code) {
             setStatus(`Barcode detected: ${result.codeResult.code}`);
             fetchProductDetails(result.codeResult.code);
-            Quagga.offDetected(handleBarcodeDetected); // Stop scanning after a successful detection
+            Quagga.offDetected(handleBarcodeDetected);
         }
     };
 
     const handleStore = () => {
-        // Check if product details exist
+
         if (product) {
-            // Call the Firebase function to store the details
+
             firebase.handleCreateNewListing(
                 product.name,
                 product.quantity,
                 product.brand,
                 product.imageUrl,
                 expiry,
-                category // Pass the category value
+                category
             );
             setStatus('Product stored successfully in Firebase.');
+            setProduct(null);
         } else {
             setStatus('No product details to store.');
         }
