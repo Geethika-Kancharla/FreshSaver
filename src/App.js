@@ -1,5 +1,4 @@
-import React from 'react'
-
+import React, { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home';
 import Register from './pages/Register';
@@ -8,8 +7,6 @@ import { useFirebase } from './context/Firebase';
 import { Navigate } from 'react-router-dom';
 import Details from './pages/Details';
 import Display from './pages/Display';
-
-
 
 function App() {
 
