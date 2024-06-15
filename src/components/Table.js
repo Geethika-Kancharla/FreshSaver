@@ -27,9 +27,9 @@ const Table = (props) => {
             <table className=" text-sm text-left text-gray-500">
                 <thead className="text-xs uppercase bg-white text-gray-700">
                     <tr>
-                        <th scope="col" className="px-70 py-3 text-xl">
+                        {/* <th scope="col" className="px-70 py-3 text-xl">
                             <span className="sr-only">Image</span>
-                        </th>
+                        </th> */}
                         <th scope="col" className="px-6 py-3 text-xl">
                             Product Name
                         </th>

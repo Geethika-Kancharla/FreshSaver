@@ -102,7 +102,7 @@ const Display = () => {
                     )}
                 </div>
                 <div className='flex justify-center items-center'>
-                    <button onClick={fetchQueriedItems} className='w-fit m-4 bg-blue-200 border border-black text-black'>Query</button>
+                    <button onClick={fetchQueriedItems} className='w-fit m-4 bg-blue-200 border border-black text-black'>Filter</button>
                     <button onClick={resetItems} className='w-fit m-4 bg-blue-200 text-black'>Reset</button>
                     <button onClick={fetchCategories} className='w-fit m-4 bg-blue-200 border border-black text-black'>Suggest</button>
                 </div>

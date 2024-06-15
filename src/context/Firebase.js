@@ -150,7 +150,7 @@ export const FirebaseProvider = (props) => {
 
             const userId = user.uid;
             const twoDaysFromNow = new Date();
-            twoDaysFromNow.setDate(twoDaysFromNow.getDate() + 2);
+            twoDaysFromNow.setDate(twoDaysFromNow.getMonth() + 1);
 
             const formattedTwoDaysFromNow = `${twoDaysFromNow.getFullYear()}-${(twoDaysFromNow.getMonth() + 1).toString().padStart(2, '0')}-${twoDaysFromNow.getDate().toString().padStart(2, '0')}`;
 
