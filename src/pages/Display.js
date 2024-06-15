@@ -8,6 +8,7 @@ const Display = () => {
     const [queriedItems, setQueriedItems] = useState([]);
     const [queriedCategory, setQueriedCategory] = useState([]);
     const [recipes, setRecipes] = useState([]);
+    const [notifiedItems, setNotifiedItems] = useState([]);
     const firebase = useFirebase();
 
     const APP_ID = "38eda028";
@@ -30,6 +31,54 @@ const Display = () => {
 
         fetchAllItems();
     }, [firebase]);
+
+    // start
+
+    useEffect(() => {
+        const checkExpiryDates = async () => {
+            if (Notification.permission !== 'granted') {
+                const permission = await Notification.requestPermission();
+                if (permission !== 'granted') {
+                    console.log('Notification permission denied');
+                    return;
+                }
+            }
+
+            const now = new Date();
+            const oneMonthFromNow = new Date();
+            oneMonthFromNow.setMonth(oneMonthFromNow.getMonth() + 1);
+
+            items.forEach(item => {
+                const itemData = item.data();
+                if (itemData && itemData.pname && itemData.expiry) {
+                    const { id, pname, expiry } = itemData; // Include item id
+                    const expiryDate = new Date(expiry);
+                    console.log(`Checking item: ${pname}, Expiry Date: ${expiryDate}`);
+
+                    if (expiryDate <= oneMonthFromNow && expiryDate > now && !notifiedItems.includes(id)) {
+                        new Notification('Expiry Alert', {
+                            body: `${pname} is expiring on ${expiryDate.toDateString()}`,
+                            icon: '/path/to/icon.png'
+                        });
+
+                        console.log(`Notification sent for item: ${pname}`);
+
+                        // Update notified items state
+                        setNotifiedItems([...notifiedItems, id]);
+                    }
+                } else {
+                    console.log('Item data is incomplete:', item);
+                }
+            });
+        };
+
+        if (items.length > 0) {
+            checkExpiryDates();
+        }
+    }, [items, notifiedItems]); // Include notifiedItems in dependency array
+
+
+    //end
 
     const fetchQueriedItems = async () => {
         try {
@@ -81,6 +130,7 @@ const Display = () => {
     const resetItems = () => {
         setQueriedItems([]);
         setRecipes([]);
+        setNotifiedItems([]);
     };
 
     const handleItemDelete = (deletedItemId) => {
