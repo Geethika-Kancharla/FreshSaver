@@ -40,6 +40,9 @@ const Table = (props) => {
                             Quantity
                         </th>
                         <th scope="col" className="px-6 py-3">
+                            Expiry Date
+                        </th>
+                        <th scope="col" className="px-6 py-3">
                             Action
                         </th>
                     </tr>
@@ -57,6 +60,9 @@ const Table = (props) => {
                         </td>
                         <td className="px-6 py-4 font-semibold text-gray-900">
                             {props.quantity}
+                        </td>
+                        <td className="px-6 py-4 font-semibold text-gray-900">
+                            {props.expiry}
                         </td>
                         <td className="px-6 py-4 space-x-4 flex">
                             <button className="font-medium text-white bg-green-500 hover:bg-green-600 py-1 px-3 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" >View</button>

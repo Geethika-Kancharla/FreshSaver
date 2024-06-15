@@ -17,6 +17,7 @@ const Display = () => {
     const handleItemDelete = (deletedItemId) => {
         setItems(items.filter(item => item.id !== deletedItemId));
     };
+    
 
     return (
         <div>
