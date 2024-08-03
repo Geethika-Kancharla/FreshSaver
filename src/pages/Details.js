@@ -34,7 +34,6 @@ const Details = () => {
                 </div>
             </div>
 
-
             <div className="md:w-1/2 p-4">
                 <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
                     <h1 className="text-3xl text-center mb-6 font-semibold">Enter Product Details</h1>

@@ -45,12 +45,12 @@ const BarcodeScanner = () => {
             console.log('API Response:', response.data);
             if (response.data.status === 1) {
                 const productData = response.data.product;
-                console.log('Product Data:', productData); // Log the product data
+                console.log('Product Data:', productData);
                 setProduct({
                     name: productData.product_name || 'N/A',
                     brand: productData.brands || 'N/A',
                     quantity: productData.quantity || 'N/A',
-                    imageUrl: productData.image_url || null, // Ensure this is available in the response
+                    imageUrl: productData.image_url || null,
                 });
                 setStatus('Product details fetched successfully.');
             } else {
@@ -118,16 +118,20 @@ const BarcodeScanner = () => {
                             <p className="italic">No image available</p>
                         )}
                     </div>
-                    <p><strong>Name:</strong> {product.name}</p>
-                    <p><strong>Brand:</strong> {product.brand}</p>
-                    <p><strong>Quantity:</strong> {product.quantity}</p>
+                    <div className='flex flex-col space-y-4'>
+                        <p className='text-2xl'><strong className='mt-2 font-bold text-xl'>Name:</strong> {product.name}</p>
+                        <p className='text-2xl'><strong className='mt-2 font-bold text-xl'>Brand:</strong> {product.brand}</p>
+                        <p className='text-2xl'><strong className='mt-2 font-bold text-xl'>Quantity:</strong> {product.quantity}</p>
+                    </div>
                     <div className='flex flex-col space-y-3'>
+                        <label className='mt-6 font-bold text-xl'>Expiry Date :</label>
                         <input
                             type="date"
                             value={expiry}
                             onChange={(e) => setExpiry(e.target.value)}
                             className="border border-gray-300 rounded-sm p-6 text-lg mt-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
+                        <label className='mt-6 font-bold text-xl'>Category :</label>
                         <input
                             type="text"
                             value={category}
@@ -138,7 +142,7 @@ const BarcodeScanner = () => {
                     </div>
                     <button
                         onClick={handleStore}
-                        className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md mt-4 focus:outline-none focus:ring-2 focus:ring-green-500"
+                        className="bg-green-500 hover:bg-green-600 text-white p-6 rounded-md mt-4 focus:outline-none focus:ring-2 focus:ring-green-500 w-fit"
                     >
                         Store
                     </button>
