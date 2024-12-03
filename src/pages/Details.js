@@ -70,7 +70,7 @@ const Details = () => {
                             className="border border-gray-300 rounded-sm w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
                         />
                     </div>
-                    <div className="mb-6">
+                     <div className="mb-6">
                         <label htmlFor="coverPic" className="block text-sm font-medium text-gray-700 mb-1">Upload Cover Pic</label>
                         <input
                             id="coverPic"
@@ -78,7 +78,7 @@ const Details = () => {
                             onChange={(e) => setCoverPic(e.target.files[0])}
                             className="border border-gray-300 rounded-sm w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
                         />
-                    </div>
+                    </div> 
                     <div className="text-center">
                         <button
                             type="submit"

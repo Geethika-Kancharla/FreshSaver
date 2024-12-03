@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home';
 import Register from './pages/Register';
@@ -11,23 +11,23 @@ import Display from './pages/Display';
 
 function App() {
 
-  const firebase = useFirebase();
+    const firebase = useFirebase();
 
-  const currentUser = firebase.isLoggedIn;
+    const currentUser = firebase.isLoggedIn;
 
-  const RequireAuth = ({ children }) => {
-    return currentUser ? children : <Navigate to="/"></Navigate>;
-  }
+    const RequireAuth = ({ children }) => {
+        return currentUser ? children : <Navigate to="/"></Navigate>;
+    }
 
-  return (
-    <Routes>
-      <Route path="/home" element={<RequireAuth><Home /></RequireAuth>} />
-      <Route index path="/register" element={<Register />} />
-      <Route index path="/details" element={<Details />} />
-      <Route index path="/display" element={<Display />} />
-      <Route index element={<Login />} />
-    </Routes>
-  );
+    return (
+        <Routes>
+            <Route index element={<Home />} />
+            <Route index path="/register" element={<Register />} />
+            <Route path="/details" element={<RequireAuth><Details /></RequireAuth>} />
+            <Route index path="/display" element={<RequireAuth><Display /></RequireAuth>} />
+            <Route path="/login" element={<Login />} />
+        </Routes>
+    );
 }
 
 export default App;

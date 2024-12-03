@@ -7,7 +7,8 @@ import {
     onAuthStateChanged,
     signInWithEmailAndPassword,
     signInWithPopup,
-    signOut
+    signOut,
+    sendPasswordResetEmail
 } from 'firebase/auth'
 import { getFirestore, collection, query, where, getDocs, doc, deleteDoc, setDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
@@ -115,6 +116,10 @@ export const FirebaseProvider = (props) => {
 
     const getImageURL = (path) => {
         return getDownloadURL(ref(storage, path));
+    }
+
+    const sendPReset = (email) => {
+        sendPasswordResetEmail(firebaseAuth, email);
     }
 
     const listAllItems = async () => {
@@ -255,7 +260,8 @@ export const FirebaseProvider = (props) => {
             listOnExpiry,
             user,
             listCategories,
-            handleLogout
+            handleLogout,
+            sendPReset
         }
         }>
             {props.children}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Home.css';
-import 'boxicons/css/boxicons.min.css'; // Importing boxicons CSS
+import 'boxicons/css/boxicons.min.css'; 
 import { Link } from 'react-router-dom'
 import { useFirebase } from '../context/Firebase';
 
@@ -70,7 +70,6 @@ const Home = () => {
 
   return (
     <div className='h-screen'>
-      {/* Header */}
       <header className={`header ${menuActive ? 'active' : ''}`}>
         <a href="#" className="logo">FS<span className="animate" style={{ '--i': 1 }}></span></a>
         <div className="bx bx-menu" id="menu-icon" onClick={toggleMenu}>
@@ -82,14 +81,11 @@ const Home = () => {
           <a href="#education">Sevices</a>
           <a href="#contact">Feedback</a>
           <Link className="text-green-500 pl-6 hover:bg-white hover:text-red-600" onClick={firebase.handleLogout}>Logout </Link>
-
-
           <span className="active-nav"></span>
           <span className="animate" style={{ '--i': 2 }}></span>
         </nav>
       </header >
 
-      {/* Home Section */}
       < section className="home show-animate" id="home" >
         <div className="home-content">
           <h1>Welcome to <span>"FreshSaver"!</span><span className="animate" style={{ '--i': 2 }}></span></h1>
@@ -107,7 +103,6 @@ const Home = () => {
         <span className="animate home-img" style={{ '--i': 7 }}></span>
       </section >
 
-      {/* About Section */}
       < section className="about" id="about" >
         <h2 className="heading">About <span>Me</span><span className="animate scroll" style={{ '--i': 1 }}></span></h2>
         <div className="about-img">
@@ -125,7 +120,7 @@ const Home = () => {
       </section >
 
 
-      {/* Education Section */}
+      
       < section className="education" id="education" >
         <h2 className="heading">Our <span>Services</span><span className="animate scroll" style={{ '--i': 1 }}></span></h2>
         <div className="education-row">
@@ -187,53 +182,12 @@ const Home = () => {
       </section >
 
 
-      {/* Contact Section */}
-      < section className="contact" id="contact" >
-        <h2 className="heading">Feedback <span></span><span className="animate scroll" style={{ '--i': 1 }}></span></h2>
-        <form action="#">
-          <div className="input-box">
-            <div className="input-field">
-              <input type="text" name="name" required />
-              <label>Your Name</label>
-              <span className="animate scroll" style={{ '--i': 2 }}></span>
-            </div>
-            <div className="input-field">
-              <input type="email" name="email" required />
-              <label>Your Email</label>
-              <span className="animate scroll" style={{ '--i': 3 }}></span>
-            </div>
-          </div>
-          <div className="input-box">
-            <div className="input-field">
-              <input type="text" name="subject" required />
-              <label>Subject</label>
-              <span className="animate scroll" style={{ '--i': 4 }}></span>
-            </div>
-          </div>
-          <div className="input-box">
-            <div className="input-field textarea">
-              <textarea name="message" required></textarea>
-              <label>Your Message</label>
-              <span className="animate scroll" style={{ '--i': 5 }}></span>
-            </div>
-          </div>
-          <div className="btn-box btns">
-            <button type="submit" className="btn">Send</button>
-            <span className="animate scroll" style={{ '--i': 6 }}></span>
-          </div>
-        </form>
-      </section >
 
-      {/* Footer */}
-      < footer >
-        <div className="footer-text">
-          <p>© 2023 Nishat Mahmud. All Rights Reserved.<span className="animate scroll" style={{ '--i': 1 }}></span></p>
-        </div>
-        <div className="footer-iconTop">
-          <a href="#"><i className="bx bx-up-arrow-alt"></i></a>
-          <span className="animate scroll" style={{ '--i': 2 }}></span>
-        </div>
-      </footer >
+      <div className="bg-gray-900 p-12 text-3xl">
+        <p className='text-white text-center'>Made with <span className='text-red-700'>❤</span> FreshSaver</p>
+      </div>
+
+
     </div >
   );
 };
