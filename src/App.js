@@ -8,7 +8,6 @@ import { Navigate } from 'react-router-dom';
 import Details from './pages/Details';
 import Display from './pages/Display';
 
-
 function App() {
 
     const firebase = useFirebase();
