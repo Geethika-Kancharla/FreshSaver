@@ -15,7 +15,7 @@ function App() {
     const currentUser = firebase.isLoggedIn;
 
     const RequireAuth = ({ children }) => {
-        return currentUser ? children : <Navigate to="/"></Navigate>;
+        return currentUser ? children : <Navigate to="/login"></Navigate>;
     }
 
     return (

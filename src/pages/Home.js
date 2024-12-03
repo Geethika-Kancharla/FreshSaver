@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Home.css';
-import 'boxicons/css/boxicons.min.css'; 
+import 'boxicons/css/boxicons.min.css';
 import { Link } from 'react-router-dom'
 import { useFirebase } from '../context/Firebase';
 
@@ -20,6 +20,7 @@ const Home = () => {
   const firebase = useFirebase();
 
   useEffect(() => {
+    console.log(firebase.isLoggedIn)
     const handleScroll = () => {
       const sections = document.querySelectorAll('section');
       const navLinks = document.querySelectorAll('header nav a');
@@ -80,7 +81,11 @@ const Home = () => {
           <a href="#about">About</a>
           <a href="#education">Sevices</a>
           <a href="#contact">Feedback</a>
-          <Link className="text-green-500 pl-6 hover:bg-white hover:text-red-600" onClick={firebase.handleLogout}>Logout </Link>
+          {firebase.isLoggedIn ? (
+            <Link className="text-green-500 pl-6 hover:bg-white hover:text-red-600" onClick={firebase.handleLogout}>Logout </Link>
+          ) : (
+            <Link className="text-green-500 pl-6 hover:bg-white hover:text-red-600 border border-green-600" to="/login">Login</Link>
+          )}
           <span className="active-nav"></span>
           <span className="animate" style={{ '--i': 2 }}></span>
         </nav>
@@ -120,7 +125,7 @@ const Home = () => {
       </section >
 
 
-      
+
       < section className="education" id="education" >
         <h2 className="heading">Our <span>Services</span><span className="animate scroll" style={{ '--i': 1 }}></span></h2>
         <div className="education-row">
