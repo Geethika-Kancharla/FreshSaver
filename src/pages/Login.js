@@ -11,9 +11,13 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const result = await firebase.signinUserWithEmailAndPassword(email, password);
-        console.log("Successful", result);
-        console.log("Logged In");
+        try {
+            const result = await firebase.signinUserWithEmailAndPassword(email, password);
+            console.log("Successful", result);
+            console.log("Logged In");
+        } catch (error) {
+            console.error("Login error:", error);
+        }
     }
 
     const handlePasswordReset = () => {
@@ -25,13 +29,15 @@ const Login = () => {
     }
 
     useEffect(() => {
-        if (firebase.isLoggedIn) {
+        // Check localStorage for existing user
+        const savedUser = localStorage.getItem('user');
+        if (savedUser || firebase.isLoggedIn) {
             navigate("/");
         }
     }, [firebase, navigate])
 
     return (
-        <div className=' min-h-screen flex items-center justify-center bg-gradient-to-br from-green-300 to-blue-300 w-screen'>
+        <div className='login-page min-h-screen flex items-center justify-center bg-gradient-to-br from-green-300 to-blue-300 w-screen'>
             <div className="login-container ">
                 <h2 className='font-bold mb-3 text-lg'>Welcome Back</h2>
                 <form onSubmit={handleSubmit}>

@@ -9,14 +9,13 @@ import {
     signInWithPopup,
     signOut,
     sendPasswordResetEmail
-} from 'firebase/auth'
+} from 'firebase/auth';
 import { getFirestore, collection, query, where, getDocs, doc, deleteDoc, setDoc } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-import { getMessaging } from "firebase/messaging";
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
+import sendExpiryEmail from "../components/emailService"
 
 const FirebaseContext = createContext(null);
-
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -33,7 +32,6 @@ export const firebaseAuth = getAuth(firebaseApp);
 const googleProvider = new GoogleAuthProvider();
 export const firestore = getFirestore(firebaseApp);
 const storage = getStorage(firebaseApp);
-export const messaging = getMessaging(firebaseApp);
 
 
 export const useFirebase = () => {
@@ -45,9 +43,11 @@ export const useFirebase = () => {
 }
 
 export const FirebaseProvider = (props) => {
-
-
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(() => {
+        // Initialize user state from localStorage
+        const savedUser = localStorage.getItem('user');
+        return savedUser ? JSON.parse(savedUser) : null;
+    });
 
     const addUser = (email, password, name, phno) => {
         createUserWithEmailAndPassword(firebaseAuth, email, password)
@@ -76,16 +76,24 @@ export const FirebaseProvider = (props) => {
 
     useEffect(() => {
         onAuthStateChanged(firebaseAuth, user => {
-            if (user)
-                setUser(user);
-            else
+            if (user) {
+                // Store user in localStorage when logged in
+                const userData = {
+                    uid: user.uid,
+                    email: user.email,
+                    // Add any other user properties you need
+                };
+                localStorage.setItem('user', JSON.stringify(userData));
+                setUser(userData);
+            } else {
+                // Remove user from localStorage when logged out
+                localStorage.removeItem('user');
                 setUser(null);
+            }
         })
     }, [])
 
-
     const handleCreateNewListing = async (pname, quantity, brand, coverPic, expiry, category) => {
-
         const fileName = coverPic.name || `image-${Date.now()}.jpg`;
         const imageRef = ref(storage, `uploads/images/${Date.now()}-${fileName}`);
         try {
@@ -98,32 +106,34 @@ export const FirebaseProvider = (props) => {
                 quantity,
                 imageURL: uploadResult.ref.fullPath,
                 userId: user.uid,
-                userEmail: user.email,
+                userEmail: user.email, // This is the registered user's email
                 id: randomId,
                 expiry,
                 category
             };
             const messageDocRef = doc(firestore, 'items', randomId);
             await setDoc(messageDocRef, messageDetail);
-            console.log('User document created with UID:', randomId);
+    
+            // Send expiry email to the registered user
+            sendExpiryEmail(user.email, pname, expiry); // Pass user.email here
+    
+            console.log('Product added with ID:', randomId);
             return randomId;
         } catch (error) {
-            console.error('Error creating user document:', error);
+            console.error('Error adding product:', error);
             throw error;
         }
     };
 
-
     const getImageURL = (path) => {
         return getDownloadURL(ref(storage, path));
-    }
+    };
 
     const sendPReset = (email) => {
         sendPasswordResetEmail(firebaseAuth, email);
-    }
+    };
 
     const listAllItems = async () => {
-
         if (user) {
             try {
                 const qr = query(
@@ -155,7 +165,7 @@ export const FirebaseProvider = (props) => {
 
             const userId = user.uid;
             const twoDaysFromNow = new Date();
-            twoDaysFromNow.setDate(twoDaysFromNow.getMonth() + 1);
+            twoDaysFromNow.setDate(twoDaysFromNow.getDate() + 7);
 
             const formattedTwoDaysFromNow = `${twoDaysFromNow.getFullYear()}-${(twoDaysFromNow.getMonth() + 1).toString().padStart(2, '0')}-${twoDaysFromNow.getDate().toString().padStart(2, '0')}`;
 
@@ -169,11 +179,14 @@ export const FirebaseProvider = (props) => {
 
             const approachingExpiryItems = [];
             querySnap.forEach((doc) => {
-                approachingExpiryItems.push(doc.data());
+                const itemData = doc.data();
+                approachingExpiryItems.push(itemData);
+
+                // Send expiry email
+                sendExpiryEmail(user.email, itemData.pname, itemData.expiry);
             });
 
             console.log('Items approaching expiry within two days:', approachingExpiryItems);
-
             return approachingExpiryItems;
         } catch (error) {
             console.error('Error querying items approaching expiry within two days:', error);
@@ -182,7 +195,6 @@ export const FirebaseProvider = (props) => {
     };
 
     const listCategories = async () => {
-
         try {
             if (!user) {
                 console.log("User is not authenticated");
@@ -224,18 +236,17 @@ export const FirebaseProvider = (props) => {
         }
     };
 
-
     const deleteItem = async (id) => {
         await deleteDoc(doc(firestore, "items", id));
-    }
+    };
 
     const signinUserWithEmailAndPassword = (email, password) => {
         signInWithEmailAndPassword(firebaseAuth, email, password);
-    }
+    };
 
     const signinWithGoogle = () => {
         signInWithPopup(firebaseAuth, googleProvider);
-    }
+    };
 
     const isLoggedIn = user ? true : false;
 
@@ -261,10 +272,10 @@ export const FirebaseProvider = (props) => {
             user,
             listCategories,
             handleLogout,
-            sendPReset
-        }
-        }>
+            sendPReset,
+            sendExpiryEmail // Add this line
+        }}>
             {props.children}
         </FirebaseContext.Provider>
-    )
-}
+    );
+};

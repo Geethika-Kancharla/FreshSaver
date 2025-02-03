@@ -1,13 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react';
+import RecipeModal from './RecipeModal';
 
-const Recipe = ({ title, calories, image }) => {
+const Recipe = ({ title, image }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     return (
-        <div className='shadow-md p-5 px-9 '>
-            <h1 className='font-bold text-xl text-center pb-4'>{title}</h1>
-            <p className='text-lg text-center m-2'>Calories: {calories}</p>
-            <img src={image} alt='' />
-        </div>
-    )
-}
+        <>
+            <div 
+                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow cursor-pointer"
+                onClick={() => setIsModalOpen(true)}
+            >
+                <div className="relative h-48 overflow-hidden">
+                    <img 
+                        src={image} 
+                        alt={title}
+                        className="w-full h-full object-cover"
+                    />
+                </div>
+                
+                <div className="p-4">
+                    <h3 className="text-lg font-semibold text-gray-800 line-clamp-2">
+                        {title}
+                    </h3>
+                </div>
+            </div>
 
-export default Recipe
+            <RecipeModal 
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                recipe={{ title, image }}
+            />
+        </>
+    );
+};
+
+export default Recipe;
