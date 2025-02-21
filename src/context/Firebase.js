@@ -77,11 +77,9 @@ export const FirebaseProvider = (props) => {
     useEffect(() => {
         onAuthStateChanged(firebaseAuth, user => {
             if (user) {
-                // Store user in localStorage when logged in
                 const userData = {
                     uid: user.uid,
                     email: user.email,
-                    // Add any other user properties you need
                 };
                 localStorage.setItem('user', JSON.stringify(userData));
                 setUser(userData);
