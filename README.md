@@ -1,9 +1,8 @@
 # FreshSaver 
 
 <div align="center">
-  <img src="path/to/logo.png" alt="FreshSaver Logo" width="200"/>
+  <img src="public/logo.png" alt="FreshSaver Logo" width="200"/>
   
-  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
   [![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://reactjs.org/)
   [![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=flat&logo=Firebase&logoColor=white)](https://firebase.google.com/)
   [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
@@ -86,7 +85,7 @@ FreshSaver is an innovative web application that revolutionizes how users manage
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/YourUsername/FreshSaver.git
+   git clone https://github.com/Geethika-Kancharla/FreshSaver.git
    cd FreshSaver
    ```
 
