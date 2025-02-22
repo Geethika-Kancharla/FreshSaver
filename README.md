@@ -24,29 +24,25 @@ FreshSaver is an innovative web application that revolutionizes how users manage
   - Manual entry option for unlisted items
   
 <div align="center">
-  <img src="public/assets/scan.png" alt="Barcode Scanning Demo" width="300"/>
+  <img src="public/assets/scan.png" alt="Barcode Scanning Demo" width="800"/>
 </div>
 
 ### 2. Expiration Tracking System
 - **Intelligent Date Monitoring**
   - Visual countdown for each product
   - Color-coded status indicators
-  - Customizable notification thresholds
 
 <div align="center">
-  <img src="public/assets/inventory.png" alt="Expiration Tracking" width="600"/>
-  <p><em>Expiration tracking dashboard showing products sorted by expiration date</em></p>
+  <img src="public/assets/inventory.png" alt="Expiration Tracking" width="800"/>
 </div>
 
 ### 3. Smart Notifications
 - **Multi-channel Alerts**
   - Email notifications
   - Push notifications
-  - Customizable alert frequency
 
 <div align="center">
   <img src="public/assets/email.jpg" alt="Recipe Suggestions" width="600"/>
-  <p><em>Recipe recommendations based on expiring ingredients</em></p>
 </div>
 
 ### 4. Recipe Recommendation Engine
@@ -56,7 +52,7 @@ FreshSaver is an innovative web application that revolutionizes how users manage
   - Difficulty level filtering
 
 
-## 🎬 Live <a name="demo"></a>
+##  Live <a name="demo"></a>
 [View Live Deployment Here](https://fresh-saver.vercel.app/)
 
 ## 🛠 Technology Stack <a name="technology-stack"></a>
