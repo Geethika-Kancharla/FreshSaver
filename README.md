@@ -12,7 +12,7 @@
 FreshSaver is an innovative web application that revolutionizes how users manage their food inventory. By combining barcode scanning technology with intelligent expiration tracking, the app helps reduce food waste and promotes sustainable consumption habits.
 
 <div align="center">
-  <img src="/assets/dashboard.png" alt="FreshSaver Dashboard" width="800"/>
+  <img src="public/assets/dashboard.png" alt="FreshSaver Dashboard" width="800"/>
 </div>
 
 ## ✨ Key Features <a name="key-features"></a>
@@ -24,7 +24,7 @@ FreshSaver is an innovative web application that revolutionizes how users manage
   - Manual entry option for unlisted items
   
 <div align="center">
-  <img src="/assets/scan.png" alt="Barcode Scanning Demo" width="300"/>
+  <img src="public/assets/scan.png" alt="Barcode Scanning Demo" width="300"/>
 </div>
 
 ### 2. Expiration Tracking System
@@ -34,7 +34,7 @@ FreshSaver is an innovative web application that revolutionizes how users manage
   - Customizable notification thresholds
 
 <div align="center">
-  <img src="/assets/inventory.png" alt="Expiration Tracking" width="600"/>
+  <img src="public/assets/inventory.png" alt="Expiration Tracking" width="600"/>
   <p><em>Expiration tracking dashboard showing products sorted by expiration date</em></p>
 </div>
 
@@ -45,7 +45,7 @@ FreshSaver is an innovative web application that revolutionizes how users manage
   - Customizable alert frequency
 
 <div align="center">
-  <img src="/assets/email.jpg" alt="Recipe Suggestions" width="600"/>
+  <img src="public/assets/email.jpg" alt="Recipe Suggestions" width="600"/>
   <p><em>Recipe recommendations based on expiring ingredients</em></p>
 </div>
 
